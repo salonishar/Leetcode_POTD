@@ -32,7 +32,7 @@ bool solve(string word){
             }
         }
         
-       int condition = vowel+cons; 
+        int condition = vowel+cons; 
         if(condition == 2) return 1;
         else return 0;       
     }
