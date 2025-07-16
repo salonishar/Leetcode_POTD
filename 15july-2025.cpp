@@ -4,39 +4,38 @@
 using namespace std;
 
 bool solve(string word){
-    if(word.length()<3) return 0;
+    bool isValid(string word) {
+        if(word.length()<3) return 0;
 
-    int digits = -1, UC = -1, LC = -1,vowel = -1 , cons = -1;
-    string vow = "AEIOUaeiou";
+        int vowel = 0 , cons = 0;
+        string vow = "AEIOUaeiou-";
 
-    for(int i=0; i<word.length(); i++){
-        if(word[i]== '@' || word[i]=='#' || word[i]=='$') 
-            return 0;
-
-        else if(word[i]>='0' && word[i]<='9') 
-            digits =1;
-
-        else if(word[i]>='A' && word[i]<='Z') 
+        for(int i=0; i<word.length(); i++)
         {
-            UC =1;
-            for(int j=0; j<vow.length(); j++){
-                if(word[i] == vow[j]) vowel = 1;
-                else cons = 1;
+            if(word[i]== '@' || word[i]=='#' || word[i]=='$') 
+                return 0;
+
+            else if(word[i]>='A' && word[i]<='z')
+            {
+                if(vowel == 0 || cons == 0)
+                {
+                    for(int j=0; j<11; j++)
+                    {
+                        if(word[i] == vow[j]) {
+                            vowel = 1;
+                            break;
+                        }
+                        if(j==10)
+                            cons = 1 ;
+                    }
+                }
             }
         }
-        else if(word[i]>='a' && word[i]<='z')
-        {
-            LC =1;
-            for(int j=0; j<vow.length(); j++){
-                if(word[i] == vow[j]) vowel = 1;
-                else cons = 1;
-            }           
-        }
+        
+       int condition = vowel+cons; 
+        if(condition == 2) return 1;
+        else return 0;       
     }
-
-    int condition = digits+UC+LC+vowel+cons;
-    if(condition == 5) return 1;
-    else return 0;
 }
 
 int main(){
